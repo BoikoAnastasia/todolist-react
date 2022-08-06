@@ -1,47 +1,47 @@
 import React, { useState } from 'react';
+import PostForm from './Components/PostForm';
 import PostList from './Components/PostList';
-import Button from './Components/UI/Button';
-import Input from './Components/UI/Input';
+import MySelect from './Components/UI/select/MySelect';
 import './styles/App.css';
 
 
 function App() {
-
   const [posts, setPosts] = useState([
     { id: 1, title: "JS", body: "JS - best language" },
     { id: 2, title: "Python", body: "Python - best language" },
     { id: 3, title: "C++", body: "C++ - best language" },
   ]);
-  const [title, titleChange]  = useState('');
-  const [body, bodyChange]  = useState('');
+  const [selectSort, setSelectedSort] = useState('');
 
-  const addNewPost = (e) => {
-    e.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      body
-    }
+  const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+  }
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+  const sortPosts = (sort) =>{
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a,b) => a[sort].localeCompare(b[sort])))
+
   }
 
   return (
     <div className="App">
-        <form >
-          <input type="text" placeholder="Введите название поста" 
-          value={title} 
-          onChange={e => titleChange(e.target.value)}
-          />
-          <input type="text" placeholder="Введите название поста"
-          value={body} 
-          onChange={e => bodyChange(e.target.value)} />
-          <button type="submit" onClick={addNewPost}>Добавить</button>
-        </form>
-        <h1>Список постов</h1>
-        <PostList posts={posts} />
+      <PostForm create={createPost} />
+      <MySelect value={selectSort}
+      onChange={sortPosts}
+       defaultValue="Сортировка" options={[
+        {value: 'title', name: 'По названию'},
+        {value: 'body', name: 'По содержанию'},
+      ]}/>
+      {posts.length !== 0
+        ? <PostList remove={removePost} posts={posts} title = "Список постов"/>
+        : <h1 style={{textAlign: "center"}}>Посты не были найдены!</h1>
+      }
     </div>
+
   );
-  
+
 }
 
 export default App;

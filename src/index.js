@@ -6,3 +6,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <App/>
 );
+
+// const header = ReactDOM.createRoot(document.getElementById('header'));
+// root.render(
+//    <Header/>
+// );
