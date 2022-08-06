@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button_list from "./UI/Button_list";
 
 const PostItem = (props) => {
 
