@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import PostForm from './Components/PostForm';
 import PostList from './Components/PostList';
 import PostSort from './Components/PostSort';
+import ModalWindow from './Components/UI/ModalWindow/ModalWindow';
 import MySelect from './Components/UI/select/MySelect';
 import './styles/App.css';
 
@@ -12,7 +13,9 @@ function App() {
     { id: 2, title: "Python", body: "Python - best language" },
     { id: 3, title: "C++", body: "C++ - best language" },
   ]);
-  const [filter, setFilter] = useState({sort: '', query: ''}) 
+  const [filter, setFilter] = useState({ sort: '', query: '' })
+
+  const [modal, setModal] = useState(false);
 
   const sortedPosts = useMemo(() => {
     if (filter.sort) {
@@ -23,11 +26,12 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false);
   }
   const removePost = (post) => {
     setPosts(posts.filter(p => p.id !== post.id))
   }
- 
+
   const sortedAndSearchPosts = useMemo(() => {
     return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query.toLowerCase()));
   }, [filter.query, sortedPosts])
@@ -35,8 +39,12 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost} />
-      <PostSort filter={filter} setFilter={setFilter}/>
+      <button onClick={()=> setModal(true)}>Создать пост</button>
+      <ModalWindow visible={modal} setVisible={setModal}>
+        <PostForm create={createPost} />
+      </ModalWindow>
+
+      <PostSort filter={filter} setFilter={setFilter} />
       <PostList remove={removePost} posts={sortedAndSearchPosts} title="Список постов" />
 
     </div>
