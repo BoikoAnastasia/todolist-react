@@ -10,18 +10,31 @@ import './styles/App.css';
 import axios from 'axios';
 import PostService from './API/PostService';
 import Loader from './Components/UI/Loader/Loader';
+import { useFetching } from './hooks/useFetching';
+import { getPageCount, getPagesArr } from './utils/pages';
+import Pagination from './Components/UI/pagination/Pagination';
 
 function App() {
-  const [posts, setPosts] = useState([]);
-  const [filter, setFilter] = useState({ sort: '', query: '' })
-  const [modal, setModal] = useState(false);
-  const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
-  const [isPostsLoading, setIsPostsLoading] = useState(false);
- 
   var axios = require('axios');
 
-  useEffect(()=>{
-    fetchPosts();
+  const [posts, setPosts] = useState([]);
+  const [filter, setFilter] = useState({ sort: '', query: '' })
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const [modal, setModal] = useState(false);
+  const sortedAndSearchPosts = usePosts(posts, filter.sort, filter.query);
+
+
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page) => {
+    const response = await PostService.getAll(limit, page);
+    setPosts(response.data);
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, limit));
+  })
+
+  useEffect(() => {
+    fetchPosts(limit, page);
   }, [])
 
   const createPost = (newPost) => {
@@ -32,27 +45,28 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
-  async function fetchPosts(){
-    setIsPostsLoading(true);
-    const posts = await PostService.getAll();
-    setPosts(posts)
-    setIsPostsLoading(false);
+  const pageChange = (page)=>{
+    setPage(page);
+    fetchPosts(limit, page);
   }
-
-
 
   return (
     <div className="App">
-      <MyButton onClick={()=> setModal(true)} style={{margin: "20px 0px 10px 0px"}}>Создать пост</MyButton>
+      <MyButton onClick={() => setModal(true)} style={{ margin: "20px 0px 10px 0px" }}>Создать пост</MyButton>
       <ModalWindow visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
       </ModalWindow>
       <PostSort filter={filter} setFilter={setFilter} />
-      {isPostsLoading 
-        ? <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}> <Loader/> </div>
+      {postError &&
+        <h1>Произошла ошибка ${postError}</h1>
+
+      }
+      {isPostsLoading
+        ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}> <Loader /> </div>
         : <PostList remove={removePost} posts={sortedAndSearchPosts} title="Список постов" />
       }
-      
+    <Pagination page={page} pageChange={pageChange} totalPages={totalPages}/>
+
 
     </div>
 

@@ -26,3 +26,20 @@ h1{
   text-align: center;
   margin-top: 40px;
 }
+
+.page{
+  display: flex;
+  justify-content: center;
+}
+
+.page__btn{
+  padding: 5px 15px;
+  border: 1px solid rgb(36, 171, 166);
+  margin: 10px 10px 0px 0px;
+  cursor: pointer;
+
+}
+.page__current{
+  border: 2px solid orange;
+  font-weight: bold;
+}
