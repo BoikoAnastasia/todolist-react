@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import MyButton from "./UI/button/MyButton";
+import MyInput from "./UI/input/MyInput";
 
 const PostForm = ({ create }) => {
 
@@ -16,14 +18,15 @@ const PostForm = ({ create }) => {
 
     return (
         <form>
-            <input type="text" placeholder="Введите название поста"
+            <MyInput type="text" placeholder="Введите название поста"
                 value={post.title}
                 onChange={e => setPost({ ...post, title: e.target.value })}
+                style={{marginBottom: "10px"}}
             />
-            <input type="text" placeholder="Введите название поста"
+            <MyInput type="text" placeholder="Введите описание поста"
                 value={post.body}
                 onChange={e => setPost({ ...post, body: e.target.value })} />
-            <button type="submit" onClick={addNewPost}>Добавить</button>
+            <MyButton type="submit" onClick={addNewPost} style={{margin: "10px 0px 0px 38%"}}>Добавить</MyButton>
         </form>
     )
 }

@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import PostForm from './Components/PostForm';
 import PostList from './Components/PostList';
 import PostSort from './Components/PostSort';
+import MyButton from './Components/UI/button/MyButton';
 import ModalWindow from './Components/UI/ModalWindow/ModalWindow';
 import MySelect from './Components/UI/select/MySelect';
 import './styles/App.css';
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={()=> setModal(true)}>Создать пост</button>
+      <MyButton onClick={()=> setModal(true)} style={{margin: "20px 0px 10px 0px"}}>Создать пост</MyButton>
       <ModalWindow visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
       </ModalWindow>

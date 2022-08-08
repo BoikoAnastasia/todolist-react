@@ -1,10 +1,11 @@
 import React from "react";
+import MyInput from "./UI/input/MyInput";
 import MySelect from "./UI/select/MySelect";
 
 const PostSort = ({filter, setFilter}) => {
     return (
         <div>
-            <input
+            <MyInput style={{marginBottom: "20px"}}
                 value={filter.query}
                 onChange={e => setFilter({...filter, query: e.target.value})}
                 placeholder='Поиск...'
