@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classes from "./UI/stylesUI/UIStyle.module.css"; 
 
 const PostItem = (props) => {
 
@@ -8,10 +9,9 @@ const PostItem = (props) => {
                 <div>
                     <strong>{props.number}. {props.post.title}</strong>
                     <div>{props.post.body}</div>
-
                 </div>
                 <div>
-                    <button onClick={() => props.remove(props.post)}>Удалить</button>
+                    <button className={classes.buttonClasses} onClick={() => props.remove(props.post)}>Удалить</button>
                 </div>
             </div>
         </div>
