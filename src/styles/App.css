@@ -6,7 +6,8 @@
 
 #root{
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
 }
 
 .App{
@@ -42,4 +43,17 @@ h1{
 .page__current{
   border: 2px solid orange;
   font-weight: bold;
+}
+.navbar{
+  height: 50px;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+
+}
+
+.navbar__items{
+  margin-left: auto;
 }

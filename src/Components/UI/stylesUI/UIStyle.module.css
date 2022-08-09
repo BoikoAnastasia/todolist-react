@@ -4,17 +4,28 @@
     border: 1px solid green;
     margin: 20px 0px 0px 0px;
 }
-.buttonClasses{
-    padding: 8px 15px;
+.buttonClassesOpen{
+    padding: 5px 10px;
+    background-color: green;
+    color: #fff;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+.buttonClassesDel{
+    padding: 5px 10px;
     background-color: red;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     border: none;
-    margin: 10px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
     cursor: pointer;
 }
 
 .divBtn{
     align-items: center;
     text-align: center;
+}
+.post__Btn{
+    display: flex;
 }

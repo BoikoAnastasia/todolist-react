@@ -10,8 +10,9 @@ const PostItem = (props) => {
                     <strong>{props.post.id}. {props.post.title}</strong>
                     <div>{props.post.body}</div>
                 </div>
-                <div>
-                    <button className={classes.buttonClasses} onClick={() => props.remove(props.post)}>Удалить</button>
+                <div className="post__Btn">
+                    <button className={classes.buttonClassesOpen} >Открыть</button>
+                    <button className={classes.buttonClassesDel} onClick={() => props.remove(props.post)}>Удалить</button>
                 </div>
             </div>
         </div>
