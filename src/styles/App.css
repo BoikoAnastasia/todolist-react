@@ -1,21 +1,21 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-#root{
+#root {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.App{
+.App {
   width: 800px;
   margin: 0 auto;
 }
 
-.post{
+.post {
   display: flex;
   padding: 15px;
   border: 2px solid green;
@@ -23,28 +23,31 @@
   justify-content: space-between;
   align-items: center;
 }
-h1{
+
+h1 {
   text-align: center;
   margin-top: 40px;
 }
 
-.page{
+.page {
   display: flex;
   justify-content: center;
 }
 
-.page__btn{
+.page__btn {
   padding: 5px 15px;
   border: 1px solid rgb(36, 171, 166);
   margin: 10px 10px 0px 0px;
   cursor: pointer;
 
 }
-.page__current{
+
+.page__current {
   border: 2px solid orange;
   font-weight: bold;
 }
-.navbar{
+
+.navbar {
   height: 50px;
   width: 100vw;
   background: rgba(0, 0, 0, 0.4);
@@ -54,6 +57,20 @@ h1{
 
 }
 
+.navbar__items {
+  margin-left: auto;
+}
+
+/* 
+.navbar__items{
+;a;a;a;
+.navbar__items{
+.navbar__items{
+.navbar__items{
+.navbar__items{
 .navbar__items{
   margin-left: auto;
 }
+.navbar__items{
+  margin-left: auto; */
+/* } */
